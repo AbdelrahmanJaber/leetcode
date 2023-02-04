@@ -6,6 +6,7 @@ public:
     int BFS(vector<vector<int>>& grid){
         queue<pair<int, int>> q;
 
+        // push all the rotten oranges
         for(int i = 0 ; i < grid.size() ; i++){
             for(int j = 0 ; j < grid[0].size() ; j++){
                 if(grid[i][j] == 2){
@@ -66,3 +67,6 @@ public:
         return isAllRotten?minimumMinutes:-1;
     }
 };
+
+// Time complexity = O(m * n)
+// Space complexity = O(m * n) 
