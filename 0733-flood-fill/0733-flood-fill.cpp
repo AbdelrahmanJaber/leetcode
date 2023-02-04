@@ -11,11 +11,14 @@ public:
 
         // push the src node to the queue
         q.push({sr, sc});
+
+        // Note that visited array is not needed, becasue if the cell is colured, that means it is visited
         
-        int orignalColor = image[sr][sc]; // 1
+        // take the original color
+        int orignalColor = image[sr][sc];
 
         // process the node (color it)
-        image[sr][sc] = color; // 2
+        image[sr][sc] = color;
 
         while(!q.empty()){
             // take the front node from the queue
@@ -47,5 +50,5 @@ public:
     }
 };
 
-// Time complexity = O(n^2)
+// Time complexity = O(m * n) becasue we might visit all the pixels
 // Space complexity = O(L (max level nodes, because of the queue))
