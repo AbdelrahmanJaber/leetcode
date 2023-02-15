@@ -37,3 +37,6 @@ public:
         return result;
     }
 };
+
+// Time complexity = O(max(m, n)), where m: size of a string, n: size of b string
+// Space complexity = O(max(m, n))
