@@ -27,11 +27,7 @@ public:
         return result;
     }
 
-    static bool comp(const vector<int>& vec1, const vector<int>& vec2){
-        return vec1[0] < vec2[0];
-    }
-
-    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+    void insertIntervalInAscendingOrder(vector<vector<int>>& intervals, vector<int>& newInterval){
         bool newIntervalAdded = false;
 
         // insert the new interval to the list of intervals while keeping the order in ascending order
@@ -50,6 +46,14 @@ public:
         if(!newIntervalAdded){
             intervals.push_back(newInterval);
         }
+    }
+
+    static bool comp(const vector<int>& vec1, const vector<int>& vec2){
+        return vec1[0] < vec2[0];
+    }
+
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        insertIntervalInAscendingOrder(intervals, newInterval);
 
         return mergeIntervals(intervals);
     }
