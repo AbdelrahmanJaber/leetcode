@@ -1,31 +1,48 @@
 class Solution {
 public:
-    int minSubArrayLen(int target, vector<int>& nums) {
-        // sliding window
-        int left = 0;
-        int right = 0;
+    int binarySearch(vector<int>& sums, int start, int target){
+        // find the first value that is greater or equal to the target
 
-        int sum = 0;
-        int minWindow = INT_MAX;
+        int end = sums.size() - 1;
+        int mid = -1;
 
-        while(right < nums.size()){
-            // extending
-            sum += nums[right];
+        while(start < end){
+            mid = (start + end) / 2;
 
-            // shrinking
-            while(sum >= target){
-                sum -= nums[left];
-                left++;
-
-                minWindow = min(minWindow, right - left + 2); // notice the position of left and right to determine the length equation
+            if(sums[mid] >= target){
+                end = mid;
             }
-
-            right++;
+            else{
+                start = mid+1;
+            }
         }
 
-        return minWindow == INT_MAX ? 0 : minWindow;
+        if(start == end) mid = start;
+
+        return sums[mid]>=target ? mid:-1;
+    }
+
+
+    int minSubArrayLen(int target, vector<int>& nums) {
+        int minWindow = INT_MAX;
+
+        // commulative sum
+        vector<int> sums(nums.size()+1, 0);
+ 
+        for(int i = 1 ; i <= nums.size() ; i++){
+            sums[i] = nums[i-1] + sums[i-1];
+        }
+
+        for(int start = 1 ; start < sums.size() ; start++){
+            int end  = binarySearch(sums, start, target + sums[start-1]);
+            if(end != -1){
+                minWindow = min(minWindow, end - start + 1);
+            }
+        }
+
+        return (minWindow == INT_MAX) ? 0 : minWindow;
     }
 };
 
-// Time complexity = O(n), where n: nums size
-// Space complexity = O(1)
+// Time complexity = O(n log(n)), where n: nums size (follow up question)
+// Space complexity = O(n) becasue of the commulative sum array
