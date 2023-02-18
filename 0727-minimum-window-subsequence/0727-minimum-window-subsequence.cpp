@@ -10,7 +10,7 @@ public:
         int min_length = INT_MAX;
         string substring = "";
 
-        while(s1_index < s1.size()){
+        while(s1_index < s1.size()){ //O(n)
 
             // try to find the subsequence
             if(s1[s1_index] == s2[s2_index]){
@@ -25,7 +25,7 @@ public:
                 while(s2_index >= 0){
                     if(s1[start] == s2[s2_index]) s2_index--;
                     start--;
-                }
+                } //O(m)
 
                 if(end - start < min_length){
                     min_length = end - start;
@@ -43,5 +43,5 @@ public:
     }
 };
 
-// Time complexity = O(n + m), where n: s1 size() and m: s2 size()
+// Time complexity = O(n * m), where n: s1 size() and m: s2 size() // outer loop O(n), inner loop O(m)
 // Space complexity = O(n) due to result string, in the worst case if the result substring is the whole s1 (ex: s1 = abbbbf, s2 = af)
