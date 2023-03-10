@@ -1,7 +1,7 @@
 class MedianFinder {
 public:
 
-    // Two Heaps approach
+    // Two Heaps approach (another solution, see first submissions for another solutions on the same approach)
     priority_queue<int> maxHeap;
     priority_queue<int, vector<int>, greater<int>> minHeap;
 
@@ -9,16 +9,21 @@ public:
     }
     
     void addNum(int num) {
-        // push always in the max heap in the beginning
-        maxHeap.push(num);
+        // determine which heap to push
+        if(maxHeap.empty() || num <= maxHeap.top()){
+            maxHeap.push(num);
+        }
+        else{
+            minHeap.push(num);
+        }
 
-        // balancing step
-        minHeap.push(maxHeap.top());
-        maxHeap.pop();
-        
+        // balancing step (In briefly: maxHeap.size() should always be eaual or greater than by just one element from minHeap.size())
+        if(maxHeap.size() > minHeap.size() + 1){
+            minHeap.push(maxHeap.top());
+            maxHeap.pop();
+        }
 
-        // maintain size property
-        if(minHeap.size() > maxHeap.size()){
+        else if(minHeap.size() > maxHeap.size()){
             maxHeap.push(minHeap.top());
             minHeap.pop();
         }
