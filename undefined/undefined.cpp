@@ -1,28 +1,37 @@
 class Solution {
 public:
-    int maximizeGreatness(vector<int>& nums) {
-        sort(nums.begin(), nums.end()); // O(n logn)
+    long long findScore(vector<int>& nums) {
+        long long result=0;
         
-        priority_queue<int, vector<int>, greater<int>> pq;
+        vector<bool> marked(nums.size(), false);
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        
         for(int i = 0 ; i < nums.size() ; i++){
-            pq.push(nums[i]);
-        } // O(n log n)
+            pq.push({nums[i], i});
+        }
         
-        int index = 0;
-        int counter = 0;
+        while(!pq.empty()){
+            pair<int, int> element = pq.top();
+            int index = element.second;
             
-        while(!pq.empty() && index < nums.size()){
-            if(pq.top() > nums[index]){
-                counter++;
-                index++;
+            if(!marked[index]){
+                result += element.first;
+                
+                marked[index] = true;
+            
+                if(index + 1 < nums.size()){
+                    marked[index+1] = true;
+                }
+                
+                if(index - 1 >= 0){
+                    marked[index-1] = true;
+                }
             }
+            
             pq.pop();
         }
         
-        
-    
-        
-        return counter;
+        return result;
         
     }
 };
