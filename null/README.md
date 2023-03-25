@@ -1,37 +1,39 @@
-<h2><a href="https://leetcode.com/problems/implement-trie-prefix-tree/">null. Implement Trie (Prefix Tree)</a></h2><h3>null</h3><hr>Can you solve this real interview question? Implement Trie (Prefix Tree) - A trie [https://en.wikipedia.org/wiki/Trie] (pronounced as "try") or prefix tree is a tree data structure used to efficiently store and retrieve keys in a dataset of strings. There are various applications of this data structure, such as autocomplete and spellchecker.
+<h2><a href="https://leetcode.com/problems/sort-items-by-groups-respecting-dependencies/">null. Sort Items by Groups Respecting Dependencies</a></h2><h3>null</h3><hr>Can you solve this real interview question? Sort Items by Groups Respecting Dependencies - There are n items each belonging to zero or one of m groups where group[i] is the group that the i-th item belongs to and it's equal to -1 if the i-th item belongs to no group. The items and the groups are zero indexed. A group can have no item belonging to it.
 
-Implement the Trie class:
+Return a sorted list of the items such that:
 
- * Trie() Initializes the trie object.
- * void insert(String word) Inserts the string word into the trie.
- * boolean search(String word) Returns true if the string word is in the trie (i.e., was inserted before), and false otherwise.
- * boolean startsWith(String prefix) Returns true if there is a previously inserted string word that has the prefix prefix, and false otherwise.
+ * The items that belong to the same group are next to each other in the sorted list.
+ * There are some relations between these items where beforeItems[i] is a list containing all the items that should come before the i-th item in the sorted array (to the left of the i-th item).
+
+Return any solution if there is more than one solution and return an empty list if there is no solution.
 
  
 
 Example 1:
 
+[https://assets.leetcode.com/uploads/2019/09/11/1359_ex1.png]
 
-Input
-["Trie", "insert", "search", "search", "startsWith", "insert", "search"]
-[[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
-Output
-[null, null, true, false, true, null, true]
 
-Explanation
-Trie trie = new Trie();
-trie.insert("apple");
-trie.search("apple");   // return True
-trie.search("app");     // return False
-trie.startsWith("app"); // return True
-trie.insert("app");
-trie.search("app");     // return True
+Input: n = 8, m = 2, group = [-1,-1,1,0,0,1,0,-1], beforeItems = [[],[6],[5],[6],[3,6],[],[],[]]
+Output: [6,3,4,1,5,2,0,7]
+
+
+Example 2:
+
+
+Input: n = 8, m = 2, group = [-1,-1,1,0,0,1,0,-1], beforeItems = [[],[6],[5],[6],[3],[],[4],[]]
+Output: []
+Explanation: This is the same as example 1 except that 4 needs to be before 6 in the sorted list.
 
 
  
 
 Constraints:
 
- * 1 <= word.length, prefix.length <= 2000
- * word and prefix consist only of lowercase English letters.
- * At most 3 * 104 calls in total will be made to insert, search, and startsWith.
+ * 1 <= m <= n <= 3 * 104
+ * group.length == beforeItems.length == n
+ * -1 <= group[i] <= m - 1
+ * 0 <= beforeItems[i].length <= n - 1
+ * 0 <= beforeItems[i][j] <= n - 1
+ * i != beforeItems[i][j]
+ * beforeItems[i] does not contain duplicates elements.
