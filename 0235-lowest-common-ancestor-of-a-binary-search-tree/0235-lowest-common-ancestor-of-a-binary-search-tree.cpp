@@ -22,3 +22,7 @@ public:
         }
     }
 };
+
+// Time complexity = O(N), where N: number of nodes in the tree
+// Space complexity = O(N), since the maximum height of the tree used by the recusrsion stack 
+// would be N (in case the BST was skewed and all nodes was in the left or in the right)
