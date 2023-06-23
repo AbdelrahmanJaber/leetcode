@@ -11,18 +11,24 @@
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if(p->val < root->val && q->val < root->val){
-            return lowestCommonAncestor(root->left, p, q);
+        // iterative approach
+        TreeNode* LCA = root;
+
+        while(true){
+            if(p->val < LCA->val && q->val < LCA->val){
+                LCA = LCA->left;
+            }
+            else if(p->val > LCA->val && q->val > LCA->val){
+                LCA = LCA->right;
+            }
+            else{
+                return LCA;
+            }
         }
-        else if(p->val > root->val && q->val > root->val){
-            return lowestCommonAncestor(root->right, p, q);
-        }
-        else{
-            return root;
-        }
+
+        return nullptr;
     }
 };
 
-// Time complexity = O(N), where N: number of nodes in the tree
-// Space complexity = O(N), since the maximum height of the tree used by the recusrsion stack 
-// would be N (in case the BST was skewed and all nodes was in the left or in the right)
+// Time complexity = O(N), where N: number of nodes in the tree (in worst case we might visit the whole BST if it is skewed (all nodes are in the left or all nodes are in the right))
+// Space complexity = O(1)
