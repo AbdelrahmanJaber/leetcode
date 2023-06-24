@@ -11,15 +11,14 @@
  */
 class Solution {
 public:
-    int diameter = 0;
 
-    int diameterOfTree(TreeNode* root){
+    int diameterOfTree(TreeNode* root, int& diameter){
         if(root == nullptr || (root->left == nullptr && root->right == nullptr)){
             return 0;
         }
 
-        int leftDiamater = diameterOfTree(root->left);
-        int rightDiamater = diameterOfTree(root->right);
+        int leftDiamater = diameterOfTree(root->left, diameter);
+        int rightDiamater = diameterOfTree(root->right, diameter);
 
         if(root -> left && root -> right){
             diameter = max(diameter, leftDiamater + rightDiamater + 2);
@@ -32,7 +31,8 @@ public:
     }
 
     int diameterOfBinaryTree(TreeNode* root) {
-        diameterOfTree(root);
+        int diameter = 0;
+        diameterOfTree(root, diameter);
         return diameter;
     }
 };
