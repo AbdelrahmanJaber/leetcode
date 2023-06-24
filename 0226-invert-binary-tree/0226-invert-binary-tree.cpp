@@ -26,3 +26,6 @@ public:
         return root;
     }
 };
+
+// Time complexity = O(N), where N: number of nodes in the tree
+// Space complexity = O(h) = O(N) in the worst case if the tree is skewed. it will be O(log N) if the tree is balanced
