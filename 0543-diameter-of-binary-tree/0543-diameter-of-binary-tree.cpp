@@ -22,12 +22,14 @@ public:
 
         if(root -> left && root -> right){
             diameter = max(diameter, leftDiamater + rightDiamater + 2);
-            return max(leftDiamater, rightDiamater) + 1;
+            // return max(leftDiamater, rightDiamater) + 1;
         }
         else {
             diameter = max(diameter, leftDiamater + rightDiamater + 1);
-            return max(leftDiamater, rightDiamater) + 1;
+            // return max(leftDiamater, rightDiamater) + 1;
         }
+
+        return max(leftDiamater, rightDiamater) + 1;
     }
 
     int diameterOfBinaryTree(TreeNode* root) {
@@ -36,3 +38,6 @@ public:
         return diameter;
     }
 };
+
+// Time complexity = O(N), where N: number of nodes in the tree
+// Space complexity = O(h) = O(N) in the worst case if the tree is skewed. If the tree is balanced then it is O(log N)
