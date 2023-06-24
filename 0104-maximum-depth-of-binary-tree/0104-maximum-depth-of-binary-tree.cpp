@@ -12,14 +12,18 @@
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
-        if(root == NULL){
+        // base cases
+        if(root == nullptr){
             return 0;
         }
-        return max(1+maxDepth(root->left), 1+maxDepth(root->right));
+        if(root->left == nullptr && root->right == nullptr){
+            return 1;
+        }
+
+        // post order to the left and right subtree
+        int leftDepth = maxDepth(root->left);
+        int rightDepth = maxDepth(root->right);
+
+        return max(leftDepth, rightDepth) + 1;
     }
 };
-
-// Time complexity = O(N), where N: number of nodes in the tree
-
-// Space complexity = O(N) in the worst case if the tree is unbalanced(all the nodes in the left sub tree or 
-// right sub tree), O(log N) in the best case if the tree is balanced
