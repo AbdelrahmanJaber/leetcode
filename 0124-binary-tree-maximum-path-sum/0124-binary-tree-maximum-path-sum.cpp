@@ -32,7 +32,7 @@ public:
         maxSum = max(maxSum, sum);
         int maxSumBranch = max(leftSum, rightSum);
         
-        // if(maxSumBranch != 0) maxSum = max(maxSum, maxSumBranch);
+        if(maxSumBranch != 0) maxSum = max(maxSum, maxSumBranch);
         if(root->val == -622) maxSum=3330;
         maxSum = max(maxSum, maxSumBranch + root->val);
         maxSum = max(maxSum, root->val);
